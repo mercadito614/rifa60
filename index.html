@@ -143,10 +143,15 @@
 
     async function cargarBoletos() {
       try {
-        const res = await fetch(API_URL);
+        const res = await fetch(API_URL, {
+          method: "GET",
+          mode: "cors",
+          redirect: "follow"
+        });
         boletosData = await res.json();
         renderGrid();
       } catch (err) {
+        console.error("Detalle del error:", err);
         alert("Error al cargar los boletos. Revisa la URL de Apps Script.");
       } finally {
         document.getElementById("loading").classList.add("hidden");
